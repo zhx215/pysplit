@@ -439,11 +439,12 @@ class Trajectory(HyPath):
 
                 if self.uptake.loc[w, 'dq_initial'] < precipitation:
                     # Adjust previous fractions
-                    self.uptake.loc[is_below, 'dq'] = (
+                    if self.uptake.loc[w, 'Timestep'] != 0:
+                      self.uptake.loc[is_below, 'dq'] = (
                         self.uptake.loc[is_below, 'below'] *
                         self.uptake.loc[w, 'q'])
 
-                    self.uptake.loc[is_above, 'dq'] = (
+                      self.uptake.loc[is_above, 'dq'] = (
                         self.uptake.loc[is_above, 'above'] *
                         self.uptake.loc[w, 'q'])
 
